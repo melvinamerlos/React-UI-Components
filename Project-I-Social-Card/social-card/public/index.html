@@ -4,21 +4,125 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+
+     <!-- Using a CDN bring in the React, ReactDOM, and Babel libraries -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
+
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
-
+ 
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+     <!-- Some Plain CSS to mess around -->
+    <style>
+
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .parent-element {
+        display: flex;
+        flex-direction: column;
+        width: 550px;
+        height: 530px;
+        margin: 0 auto;
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .logo {
+        width: 50px;
+        height: 50px;
+        margin: 1px 5px 1px 1px;
+      }
+
+      .title {
+        display: flex;
+        flex-direction: row;
+        height: 20px;
+        justify-content: left;
+        align-items: center;
+        padding-top: 10px;
+      }
+
+      .title h5 {
+        padding: 0 5px 0 0;
+      }
+
+      .title p {
+        color: gray;
+        font-size: 12px;
+      }
+
+      .header-content {
+        display: flex;
+        flex-direction: column;
+        height: 70px;
+        margin: 1px;
+        padding: 1px 1px 5px 1px;
+        font-size: 13px;
+
+      }
+
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        width: 98.5%;
+        margin: 1px;
+        height: 390px;
+        align-items: flex-end; 
+        flex-wrap: wrap;
+      }
+
+      .card-content .description {
+        border: 1px solid rgb(216, 213, 213);
+        border-radius: 2.5px;
+        width: 473px;
+        padding: 0 0 10px 10px;
+      }
+
+      #special {
+        padding: 8px 0 0 0;
+        margin: 0 0 0 0;
+        line-height: 15x;
+      }
+
+      #space {
+        padding-bottom: 5px;
+      }
+
+      .card-content .description a {
+        color: rgb(177, 174, 174);
+        text-decoration: none;
+      }
+
+      .card-content .banner {
+        width: 485px;
+        height: 263px;
+      }
+
+    </style>
+
     <title>React App</title>
   </head>
   <body>
@@ -26,6 +130,7 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -36,5 +141,87 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <!-- Make sure the type is babel! -->
+    <script type="text/babel">
+      // Get the parent element
+      const parent = document.getElementById('root');
+
+      // functional component with component Children
+      const App = (props) => {
+        return (
+          <div className="parent-element" id="element-id">
+            <HeaderContainer />
+            <CardContainer />
+          </div>
+        )
+      }
+
+      // Header --------------------------------------------------------------------------------------------------------------------------
+      const HeaderContainer = (props) => {
+        return (
+          <div class="header">
+              <ImageThumbnail />
+              <div class="header-content">
+                <HeaderTitle />
+                <HeaderContent />
+              </div>
+          </div>
+          
+          
+        )
+      }
+
+      const ImageThumbnail = (props) => {
+        return <img class="logo" src ="https://tk-assets.lambdaschool.com/1c1b7262-cf23-4a9f-90b6-da0d3c74a5c6_lambdacrest.png"/>
+      }
+
+      const HeaderTitle = (props) => {
+        return ( 
+          <div class="title">
+            <h5>Lambda School</h5>
+            <p>@ LambdaSchool • 26 jan</p>
+          </div>
+        )
+      }
+
+      const HeaderContent = (props) => {
+        return <p>Let's Learn React by building simple interfaces with components. Don't try to overthink it, just keep it simple and have fun. Once you feel comfortable using components you are well on your way to mastering React!</p>
+      }
+
+      // Body ----------------------------------------------------------------------------------------------------------------------------
+      const CardContent = (props) => {
+        return (
+          <div class="description">
+            <h5 id="special">Get Started with React</h5>
+            <p id="special space">React makes it painless to create interactive Uls. Design simple views for each state in your application</p>
+            <a id="special" href="reactjs.org" target="reactjs.org">reactjs.org</a>
+          </div>
+
+        )
+      }
+
+      const CardBanner = (props) => {
+        return (
+          <a href="https://www.reactjs.org">
+            <img class="banner" src="https://tk-assets.lambdaschool.com/fcd75197-7d12-46ec-bc9e-4130f34822fa_reactbackground.png"/>
+          </a>
+        )
+      }
+
+      const CardContainer = (props) => {
+        return (
+          <div class="card-content">
+            <CardBanner />
+            <CardContent />
+          </div>
+        )
+      }
+
+      // The React way to render our elements to the DOM
+      ReactDOM.render(<App />, parent)
+
+    </script>
+
   </body>
 </html>
