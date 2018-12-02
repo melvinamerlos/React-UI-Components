@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+
+     <!-- Using a CDN bring in the React, ReactDOM, and Babel libraries -->
+     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+     <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+ 
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -19,6 +25,97 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+    <style>
+      .parent-element {
+        display: flex;
+        font-family: Arial, Helvetica, sans-serif;
+        flex-direction: column;
+        height: 400px;
+        width: 500px;
+        border: 2px solid black;
+        margin: 0 auto;
+      }
+
+      .calculator-display {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        background: black;
+        height: 25%;
+        border: 1px solid gray;
+      }
+
+      .calculator-display h1 {
+        width: 95%;
+        color: white;
+        text-align: right;
+        padding-right: 10px;
+        font-size: 50px;
+      }
+
+      .keypad {
+        display: flex;
+        flex-direction: row;
+        height: 75%;
+        border: 1px solid gray;
+      }
+
+      .keypad .number-section {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 75%;
+        border: 1px solid gray;
+      }
+
+      .keypad .number-section .number-button {
+        display: flex;
+        height: 19%;
+        width: 32.7%;
+        border: 1px solid gray;
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .keypad .number-section .wide {
+        display: flex;
+        height: 19%;
+        width: 100%;
+        border: 1px solid gray;
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .keypad .action-section {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 25%;
+        border: 1px solid gray;
+        margin: 0;
+      }
+
+      .keypad .action-section .action-button {
+        display: flex;
+        height: 19.3%;
+        width: 100%;
+        border: 1px solid gray;
+        background: maroon;
+        color: white;
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+      }
+
+
+    </style>
+
+
     <title>React App</title>
   </head>
   <body>
@@ -36,5 +133,62 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <script type="text/babel">
+      const parent = document.getElementById('root');
+
+      const App = (props) => {
+        return (
+          <div className="parent-element" id="element-id">
+            <CalculatorDisplay />
+            <div class="keypad">
+                <div class="number-section">
+                  <h1 class="wide">Clear</h1>
+                  <NumberButton number="7" />
+                  <NumberButton number="8" />
+                  <NumberButton number="9" />
+                  <NumberButton number="4" />
+                  <NumberButton number="5" />
+                  <NumberButton number="6" />
+                  <NumberButton number="1" />
+                  <NumberButton number="2" />
+                  <NumberButton number="3" />
+                  <h1 class="wide">0</h1>
+                </div>
+                <div class="action-section">
+                  <ActionButton symbol="÷"/>
+                  <ActionButton symbol="×"/>
+                  <ActionButton symbol="−"/>
+                  <ActionButton symbol="+"/>
+                  <ActionButton symbol="="/>
+                </div>
+            </div>
+          </div>
+        )
+      }
+
+      // Display --------------------------------------------------------------------------------------------------------------------------
+
+      const CalculatorDisplay = (props) => {
+        return (
+          <div class="calculator-display">
+            <h1>0</h1>
+          </div>
+          
+        )
+      }
+
+      const NumberButton = (props) => {
+        return <h1 class="number-button">{props.number}</h1>
+      }
+
+      const ActionButton = (props) => {
+        return <h1 class="action-button">{props.symbol}</h1>
+      }
+
+      ReactDOM.render(<App />, parent)
+
+    </script>
+
   </body>
 </html>
